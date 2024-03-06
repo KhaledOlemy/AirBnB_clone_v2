@@ -7,9 +7,9 @@ mkdir -p /data/web_static/shared/
 touch /data/web_static/releases/test/index.html
 echo "
 <!DOCTYPE html>
-<html lang="en">
+<html lang=\"en\">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=\"UTF-8\">
     <title>Document</title>
 </head>
 <body>
