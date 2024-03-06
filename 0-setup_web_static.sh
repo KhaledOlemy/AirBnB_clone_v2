@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Install Nginx, make required directories, alter permissions
+# display fake page for illustration, restart Nginx after edits
 apt-get -y update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
