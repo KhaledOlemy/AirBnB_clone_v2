@@ -3,12 +3,11 @@
 # display fake page for illustration, restart Nginx after edits
 apt-get -y update
 apt-get -y install nginx
-ufw allow 'Nginx HTTP'
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
+chown -R ubuntu:ubuntu /data/
 touch /data/web_static/releases/test/index.html
-echo "
-<!DOCTYPE html>
+echo "<!DOCTYPE html>
 <html lang=\"en\">
 <head>
     <meta charset=\"UTF-8\">
@@ -22,7 +21,6 @@ echo "
 </html>
 " > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
-chown -R ubuntu:ubuntu /data/
 new_server_config=\
 "server {
 	listen 80 default_server;
