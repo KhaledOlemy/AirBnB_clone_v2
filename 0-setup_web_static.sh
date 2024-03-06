@@ -5,7 +5,6 @@ apt-get -y update
 apt-get -y install nginx
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
-chown -R ubuntu:ubuntu /data/
 touch /data/web_static/releases/test/index.html
 echo "<!DOCTYPE html>
 <html lang=\"en\">
@@ -21,6 +20,8 @@ echo "<!DOCTYPE html>
 </html>
 " > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
+chown -R ubuntu:ubuntu /data/
+chgrp -R ubuntu /data/
 new_server_config=\
 "server {
 	listen 80 default_server;
@@ -29,7 +30,7 @@ new_server_config=\
 	root /var/www/html;
 	index index.html index.htm index.nginx-debian.html;
 
-	server_name olemy.tech;
+	server_name _;
 	add_header X-Served-By $HOSTNAME;
 
 	location /hbnb_static {
