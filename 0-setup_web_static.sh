@@ -44,4 +44,4 @@ new_server_config=\
 	error_page 404 /404.html;
 }"
 bash -c "echo -e '$new_server_config' > /etc/nginx/sites-enabled/default"
-serivce nginx restart
+service nginx restart
