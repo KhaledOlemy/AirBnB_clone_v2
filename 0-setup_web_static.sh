@@ -33,7 +33,7 @@ new_server_config=\
 	server_name _;
 	add_header X-Served-By $HOSTNAME;
 
-	location /hbnb_static {
+	location /hbnb_static/ {
 		 alias /data/web_static/current/;
 		 index index.html index.htm index.nginx-debian.html;
 	}
