@@ -10,10 +10,10 @@ def do_pack():
     filename = filename.replace(' ', '').replace(':', '')
     filename = f"versions/web_static_{filename}.tgz"
     if not os.path.isdir("versions"):
-        if not local("mkdir versions").succeeded:
+        if local("mkdir versions").failed:
             return None
     status = local(f"tar -czvf {filename} web_static")
-    if not status.succeeded:
+    if status.failed:
         return None
     else:
         return filename
