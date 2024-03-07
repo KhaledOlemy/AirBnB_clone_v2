@@ -5,13 +5,13 @@ configure the website to the new release of the website
 """
 
 from fabric.api import put, run, env
-from os.path import exists
+from os.path import isfile
 env.hosts = ['142.44.167.228', '144.217.246.195']
 
 
 def do_deploy(archive_path):
     """configure the website to the new release of the website"""
-    if exists(archive_path) is False:
+    if isfile(archive_path) is False:
         return False
     try:
         file_name = archive_path.split("/")[-1]
