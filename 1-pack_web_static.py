@@ -6,7 +6,7 @@ from fabric.api import local
 
 
 def do_pack():
-    filename = str(datetime.datetime.now()).split('.')[0].replace('-', '')
+    filename = str(datetime.datetime.utcnow()).split('.')[0].replace('-', '')
     filename = filename.replace(' ', '').replace(':', '')
     filename = f"versions/web_static_{filename}.tgz"
     if not os.path.isdir("versions"):
