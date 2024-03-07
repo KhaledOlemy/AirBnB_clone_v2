@@ -5,6 +5,8 @@ import os
 from fabric.api import local, run, put, env
 
 env.hosts = ['3.83.245.203', '54.173.35.201']
+
+
 def do_pack():
     """
     Pack dir to .tgz
@@ -52,9 +54,12 @@ def do_deploy(archive_path):
     print("New version deployed!")
     return True
 
+
+f = do_pack()
+
+
 def deploy():
     """2 calls at once, more automated"""
-    f = do_pack()
     if not f:
         return False
     return do_deploy(f)
