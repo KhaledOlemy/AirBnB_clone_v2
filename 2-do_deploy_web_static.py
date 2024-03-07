@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# configure the website to the new release of the website
+"""
+configure the website to the new release of the website 
+"""
 
 from fabric.api import run, put, env
 import os
@@ -11,18 +13,17 @@ def do_deploy(archive_path):
     if os.path.isfile(archive_path) is False:
         return False
     try:
-        filename = archive_path.split("/")[-1]
-        no_ext = filename.split(".")[0]
-        c_path = "/data/web_static/releases/"
+        file_n = archive_path.split("/")[-1]
+        d = f.split(".")[0]
+        p = "/data/web_static/releases/"
         put(archive_path, '/tmp/')
-        run('mkdir -p {}{}/'.format(c_path, dir_name))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(filename, c_path, dir_name))
-        run('rm /tmp/{}'.format(filename))
-        run('mv {0}{1}/web_static/* {0}{1}/'.format(c_path, dir_name))
-        run('rm -rf {}{}/web_static'.format(c_path, dir_name))
+        run('mkdir -p {}{}/'.format(p, d))
+        run('tar -xzf /tmp/{} -C {}{}/'.format(f, p, d))
+        run('rm /tmp/{}'.format(f))
+        run('mv {0}{1}/web_static/* {0}{1}/'.format(p, d))
+        run('rm -rf {}{}/web_static'.format(p, d))
         run('rm -rf /data/web_static/current')
-        run('ln -s {}{}/ /data/web_static/current'.format(c_path, dir_name))
+        run('ln -s {}{}/ /data/web_static/current'.format(p, d))
         return True
     except:
         return False
-
