@@ -1,13 +1,16 @@
 #!/usr/bin/python3
-# configure the website to the new release of the website
+"""
+Fabric script based on the file 1-pack_web_static.py that distributes an
+archive to the web servers
+"""
 
 from fabric.api import put, run, env
 from os.path import exists
-env.hosts = ['3.83.245.203', '54.173.35.201']
+env.hosts = ['142.44.167.228', '144.217.246.195']
 
 
 def do_deploy(archive_path):
-    """ Deploy the content of the tar onto your servers"""
+    """distributes an archive to the web servers"""
     if exists(archive_path) is False:
         return False
     try:
