@@ -15,7 +15,7 @@ def do_deploy(archive_path):
         return False
     if put(archive_path, f'/tmp/{filename}').failed:
         return False
-    if run(f"rm -r /data/web_static/releases/{dir_name}").failed:
+    if run(f"rm -rf /data/web_static/releases/{dir_name}").failed:
         return False
     if run(f"mkdir -p /data/web_static/releases/{dir_name}").failed:
         return False
