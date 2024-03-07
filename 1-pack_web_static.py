@@ -13,7 +13,7 @@ def do_pack():
     """generates a tgz archive"""
     try:
         fname = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        if isdir("versions") is False:
+        if not isdir("versions"):
             local("mkdir versions")
         file_name = "versions/web_static_{}.tgz".format(fname)
         local("tar -cvzf {} web_static".format(file_name))
