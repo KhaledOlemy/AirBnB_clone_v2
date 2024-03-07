@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # configure the website to the new release of the website """
-import os
+from os.path import isfile
 from fabric.api import run, put
 from fabric.api import env
 env.hosts = ['3.83.245.203', '54.173.35.201']
@@ -14,7 +14,7 @@ def do_deploy(archive_path):
         filename = archive_path.split('/')[-1]
         dir_name = filename.split('.')[0]
         c_path = "/data/web_static/releases/"
-        put(archive_path, f'/tmp/')
+        put(archive_path, '/tmp/')
         run(f"mkdir -p {c_path}{dir_name}/")
         run(f"tar -xzf /tmp/{filename} -C {c_path}{dir_name}/")
         run(f"rm /tmp/{filename}")
