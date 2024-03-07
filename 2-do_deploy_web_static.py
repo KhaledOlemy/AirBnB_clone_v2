@@ -26,11 +26,11 @@ def do_deploy(archive_path):
     d2 = f"/data/web_static/releases/{dir_name}"
     if run(f"mv {d1} {d2}").failed:
         return False
-    if run(f"rm -r /data/web_static/releases/{dir_name}/web_static").failed:#
+    if run(f"rm -rf /data/web_static/releases/{dir_name}/web_static").failed:#
         return False
     if run(f"rm /tmp/{filename}").failed:
         return False
-    if run(f"rm /data/web_static/current").failed:#
+    if run(f"rm -rf /data/web_static/current").failed:#
         return False
     d1 = f"/data/web_static/releases/{dir_name}"#
     d2 = f"/data/web_static/current"
