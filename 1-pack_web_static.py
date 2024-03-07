@@ -2,15 +2,19 @@
 # Compress a folder and return path to .tgz
 import datetime
 import os
-import fabric.api
+from fabric.api import local
+
+
 def do_pack():
-    filename = str(datetime.datetime.now()).split('.')[0].replace('-', '').replace(' ', '').replace(':', '')
+    filename = str(datetime.datetime.now()).split('.')[0].replace('-', '')
+    filename = filename.replace(' ', '').replace(':', '')
     filename = f"web_static_{filename}.tar.gz"
     if not os.path.isdir("versions"):
         status = fabric.api.local("mkdir versions").succeeded
         if not status:
             return None
-    status = fabric.api.local(f"tar -czvf versions/{filename}.tar.gz webstatic/").succeeded
+    status = local(f"tar -czvf versions/{filename}.tar.gz webstatic/")
+    status = status.succeeded
     if not status:
         return None
     else:
