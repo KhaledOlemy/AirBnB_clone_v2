@@ -6,7 +6,7 @@ configure the website to the new release of the website
 
 from fabric.api import put, run, env
 from os.path import isfile
-env.hosts = ['142.44.167.228', '144.217.246.195']
+env.hosts = ['3.83.245.203', '54.173.35.201']
 
 
 def do_deploy(archive_path):
