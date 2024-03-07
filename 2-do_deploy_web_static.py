@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 # configure the website to the new release of the website """
-from os.path import exists
-from fabric.api import run, put
-from fabric.api import env
-env.hosts = ['3.83.245.203', '54.173.35.201']
 
+from fabric.api import put, run, env
+from os.path import exists
+env.hosts = ['3.83.245.203', '54.173.35.201']
 
 def do_deploy(archive_path):
     """ Deploy the content of the tar onto your servers"""
