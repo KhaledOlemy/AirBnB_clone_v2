@@ -16,18 +16,12 @@ def do_deploy(archive_path):
         c_path = "/data/web_static/releases/"
         put(archive_path, f'/tmp/')
         run(f"mkdir -p {c_path}{dir_name}/")
-        d1 = f"{c_path}{dir_name}/"
-        run(f"tar -xzf /tmp/{filename} -C {d1}")
+        run(f"tar -xzf /tmp/{filename} -C {c_path}{dir_name}/")
         run(f"rm /tmp/{filename}")
-        d1 = f"{c_path}{dir_name}/web_static/*"
-        d2 = f"{c_path}{dir_name}/"
-        run(f"mv {d1} {d2}")
+        run(f"mv {c_path}{dir_name}/web_static/* {c_path}{dir_name}/")
         run(f"rm -rf {c_path}{dir_name}/web_static")
         run(f"rm -rf /data/web_static/current")
-        d1 = f"{c_path}{dir_name}/"
-        d2 = f"/data/web_static/current"
-        run(f"ln -s {d1} {d2}")
-        print("New version deployed!")
+        run(f"ln -s {c_path}{dir_name}/ /data/web_static/current")
         return True
     except:
         return False
