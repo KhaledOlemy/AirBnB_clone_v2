@@ -11,20 +11,16 @@ env.hosts = ['3.83.245.203', '54.173.35.201']
 
 
 def do_pack():
-    """
-    Pack dir to .tgz
-    """
-    filename = str(datetime.datetime.now()).split('.')[0].replace('-', '')
-    filename = filename.replace(' ', '').replace(':', '')
-    filename = f"versions/web_static_{filename}.tgz"
-    if not os.path.isdir("versions"):
-        if local("mkdir versions").failed:
-            return None
-    status = local(f"tar -cvzf {filename} web_static")
-    if status.failed:
-        return None
-    else:
-        return filename
+    """compress static into .tgz"""
+    try:
+        fname = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        if not os.path.isdir("versions"):
+            local("mkdir -p versions")
+        file_name = "versions/web_static_{}.tgz".format(fname)
+        local("tar -cvzf {} web_static".format(file_name))
+        return file_name
+    except:
+        return False
 
 
 def do_deploy(archive_path):
