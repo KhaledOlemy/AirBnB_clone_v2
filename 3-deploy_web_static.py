@@ -4,9 +4,9 @@ Fabric script based on the file 2-do_deploy_web_static.py that creates and
 distributes an archive to the web servers
 """
 
-from fabric.api import env, local, put, run
-from datetime import datetime
-from os.path import exists, isdir
+import datetime
+from fabric.api import local, put, run, env
+from os.path import isfile, isdir, exists
 env.hosts = ['3.83.245.203', '54.173.35.201']
 
 
@@ -14,7 +14,7 @@ def do_pack():
     """compress static into .tgz"""
     try:
         fname = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        if not os.path.isdir("versions"):
+        if not isdir("versions"):
             local("mkdir -p versions")
         file_name = "versions/web_static_{}.tgz".format(fname)
         local("tar -cvzf {} web_static".format(file_name))
