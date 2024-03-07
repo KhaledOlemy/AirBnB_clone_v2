@@ -8,9 +8,9 @@ env.hosts = ['3.83.245.203', '54.173.35.201']
 
 def do_deploy(archive_path):
     """ Deploy the content of the tar onto your servers"""
+    if not os.path.isfile(archive_path):
+        return False
     try:
-        if not os.path.isfile(archive_path):
-            return False
         filename = archive_path.split('/')[-1]
         dir_name = filename.split('.')[0]
         put(archive_path, f'/tmp/{filename}')
@@ -22,10 +22,10 @@ def do_deploy(archive_path):
         d2 = f"/data/web_static/releases/{dir_name}/"
         run(f"mv {d1} {d2}")
         run(f"rm -rf /data/web_static/releases/{dir_name}/web_static")
-        run(f"rm -rf /data/web_static/current").failed
+        run(f"rm -rf /data/web_static/current")
         d1 = f"/data/web_static/releases/{dir_name}/"
         d2 = f"/data/web_static/current"
-        run(f"ln -s {d1} {d2}").failed
+        run(f"ln -s {d1} {d2}")
         print("New version deployed!")
         return True
     except:
