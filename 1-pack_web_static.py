@@ -6,6 +6,9 @@ from fabric.api import local
 
 
 def do_pack():
+    """
+    Pack dir to .tgz
+    """
     filename = str(datetime.datetime.now()).split('.')[0].replace('-', '')
     filename = filename.replace(' ', '').replace(':', '')
     filename = f"versions/web_static_{filename}.tgz"
@@ -15,4 +18,5 @@ def do_pack():
     status = local(f"tar -cvzf {filename} web_static")
     if status.failed:
         return None
-    return filename
+    else:
+        return filename
