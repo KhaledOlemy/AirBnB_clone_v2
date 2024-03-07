@@ -1,48 +1,37 @@
 #!/usr/bin/python3
-# Fabfile to distribute an archive to a web server.
-import os.path
+# configure the website to the new release of the website """
+import os
+from fabric.api import run, put
 from fabric.api import env
-from fabric.api import put
-from fabric.api import run
 env.hosts = ['3.83.245.203', '54.173.35.201']
 
 
 def do_deploy(archive_path):
-    """Distributes an archive to a web server.
-
-    Args:
-        archive_path (str): The path of the archive to distribute.
-    Returns:
-        If the file doesn't exist at archive_path or an error occurs - False.
-        Otherwise - True.
-    """
-    if os.path.isfile(archive_path) is False:
+    """ Deploy the content of the tar onto your servers"""
+    if not os.path.isfile(archive_path):
         return False
-    file = archive_path.split("/")[-1]
-    name = file.split(".")[0]
-
-    if put(archive_path, "/tmp/{}".format(file)).failed is True:
+    filename = archive_path.split('/')[-1]
+    dir_name = filename.split('.')[0]
+    if put(archive_path, f'/tmp/{filename}').failed:
         return False
-    if run("rm -rf /data/web_static/releases/{}/".
-           format(name)).failed is True:
+    if run(f"mkdir -p /data/web_static/releases/{dir_name}/").failed:
         return False
-    if run("mkdir -p /data/web_static/releases/{}/".
-           format(name)).failed is True:
+    d1 = f"/data/web_static/releases/{dir_name}/"
+    if run(f"tar -xzf /tmp/{filename} -C {d1}").failed:
         return False
-    if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".
-           format(file, name)).failed is True:
+    if run(f"rm /tmp/{filename}").failed:
         return False
-    if run("rm /tmp/{}".format(file)).failed is True:
+    d1 = f"/data/web_static/releases/{dir_name}/web_static/*"
+    d2 = f"/data/web_static/releases/{dir_name}/"
+    if run(f"mv {d1} {d2}").failed:
         return False
-    if run("mv /data/web_static/releases/{}/web_static/* "
-           "/data/web_static/releases/{}/".format(name, name)).failed is True:
+    if run(f"rm -rf /data/web_static/releases/{dir_name}/web_static").failed:
         return False
-    if run("rm -rf /data/web_static/releases/{}/web_static".
-           format(name)).failed is True:
+    if run(f"rm -rf /data/web_static/current").failed:
         return False
-    if run("rm -rf /data/web_static/current").failed is True:
+    d1 = f"/data/web_static/releases/{dir_name}/"
+    d2 = f"/data/web_static/current"
+    if run(f"ln -s {d1} {d2}").failed:
         return False
-    if run("ln -s /data/web_static/releases/{}/ /data/web_static/current".
-           format(name)).failed is True:
-        return False
+    print("New version deployed!")
     return True
