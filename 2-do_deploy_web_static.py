@@ -23,7 +23,7 @@ def do_deploy(archive_path):
     if run(f"tar -xzf /tmp/{filename} -C {d1}").failed:#
         return False
     d1 = f"/data/web_static/releases/{dir_name}/web_static/*"
-    d2 = f"/data/web_static/releases/{dir_name}"
+    d2 = f"/data/web_static/releases/{dir_name}/"
     if run(f"mv {d1} {d2}").failed:
         return False
     if run(f"rm -rf /data/web_static/releases/{dir_name}/web_static").failed:#
@@ -32,8 +32,9 @@ def do_deploy(archive_path):
         return False
     if run(f"rm -rf /data/web_static/current").failed:#
         return False
-    d1 = f"/data/web_static/releases/{dir_name}"#
+    d1 = f"/data/web_static/releases/{dir_name}/"#
     d2 = f"/data/web_static/current"
     if run(f"ln -sf {d1} {d2}").failed:
         return False
+    print("New version deployed!")
     return True
