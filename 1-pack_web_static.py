@@ -6,11 +6,11 @@ from fabric.api import local
 
 
 def do_pack():
-    filename = str(datetime.datetime.utcnow()).split('.')[0].replace('-', '')
+    filename = str(datetime.datetime.now()).split('.')[0].replace('-', '')
     filename = filename.replace(' ', '').replace(':', '')
     filename = f"versions/web_static_{filename}.tgz"
     if not os.path.isdir("versions"):
-        if not local("mkdir -p versions").succeeded:
+        if not local("mkdir versions").succeeded:
             return None
     status = local(f"tar -czvf {filename} web_static")
     if not status.succeeded:
