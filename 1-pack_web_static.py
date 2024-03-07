@@ -12,7 +12,7 @@ def do_pack():
     if not os.path.isdir("versions"):
         if local("mkdir versions").failed:
             return None
-    status = local(f"tar -czvf {filename} web_static")
+    status = local(f"tar -cvzf {filename} web_static")
     if status.failed:
         return None
     else:
