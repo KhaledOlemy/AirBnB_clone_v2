@@ -58,4 +58,3 @@ def deploy():
     if not f:
         return False
     return do_deploy(f)
-
