@@ -3,12 +3,13 @@
 
 from fabric.api import put, run, env
 from os.path import exists
+import os
 env.hosts = ['3.83.245.203', '54.173.35.201']
 
 
 def do_deploy(archive_path):
     """ Deploy the content of the tar onto your servers"""
-    if exists(archive_path) is False:
+    if os.path.isfile(archive_path) is False:
         return False
     try:
         file_n = archive_path.split("/")[-1]
