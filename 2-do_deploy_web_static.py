@@ -8,7 +8,7 @@ env.hosts = ['3.83.245.203', '54.173.35.201']
 
 def do_deploy(archive_path):
     """ Deploy the content of the tar onto your servers"""
-    if not os.path.isfile(archive_path):
+    if not os.path.exists(archive_path):
         return False
     try:
         filename = archive_path.split('/')[-1]
