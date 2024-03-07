@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Compress a folder and return path to .tgz
+""" Compress a folder and return path to .tgz """
 import datetime
 import os
 from fabric.api import local
