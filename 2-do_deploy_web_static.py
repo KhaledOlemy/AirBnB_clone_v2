@@ -19,7 +19,7 @@ def do_deploy(archive_path):
         return False
     if run(f"mkdir -p /data/web_static/releases/{dir_name}/").failed:
         return False
-    d1 = f"/data/web_static/releases/{dir_name}"#
+    d1 = f"/data/web_static/releases/{dir_name}/"#
     if run(f"tar -xzf /tmp/{filename} -C {d1}").failed:#
         return False
     d1 = f"/data/web_static/releases/{dir_name}/web_static/*"
