@@ -6,4 +6,7 @@ my_app = Flask(__name__)
 
 @my_app.route("/", strict_slashes=False)
 def hello_bnbn():
+    """
+    return Hello HBNB! when requesting the root of the domain
+    """
     return "Hello HBNB!"
