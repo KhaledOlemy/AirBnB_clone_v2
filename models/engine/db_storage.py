@@ -77,5 +77,5 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        """doc meth"""
+        """calls remove func"""
         self.__session.close()
