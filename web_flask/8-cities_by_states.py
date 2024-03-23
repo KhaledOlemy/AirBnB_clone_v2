@@ -16,10 +16,8 @@ def list_of_states():
     """
     states = list(storage.all("State").values())
     states = sorted(states, key=lambda d: d.name)
-    print(states)
     cities = list(storage.all("City").values())
     cities = sorted(cities, key=lambda c: c.name)
-    print(len(cities))
     data = []
     for state in states:
         st_item = {"state": state}
@@ -29,9 +27,6 @@ def list_of_states():
                 cities_list.append(city)
         st_item["cities"] = cities_list
         data.append(st_item)
-    print('-----------------------')
-    print(data[1])
-    print('-----------------------')
     return render_template("8-cities_by_states.html", data=data)
 
 
