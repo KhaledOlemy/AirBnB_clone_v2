@@ -20,7 +20,7 @@ def list_of_states():
 
 
 @my_app.teardown_appcontext
-def tear_down(session):
+def tear_down(exc):
     storage.close()
 
 
