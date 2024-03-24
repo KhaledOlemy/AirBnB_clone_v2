@@ -33,7 +33,8 @@ def states_list_cities(search_id=None):
         state_search = [st.id for st in states]
         if search_id in state_search:
             data['status'] = "cityList"
-            data["data"] = [i for i in data["data"] if i["state"].id == search_id][0]
+            data["data"] = [i for i in data["data"] if
+                            i["state"].id == search_id][0]
         else:
             data['status'] = "cityNotFound"
             data["data"] = None
